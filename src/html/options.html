@@ -2,142 +2,43 @@
 <html>
   <head>
     <title>Options</title>
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
-    <script src="../js/options.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../assets/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/options.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-    <form>
-      <h1>Options page</h1>
-
-      <fieldset>
-        <legend>command type</legend>
-        <table>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="type" id="type_bcast">
-                bcast
+    <div class="container">
+      <section class="section" style="max-width: 50em">
+        <h5>
+          Settings
+        </h5>
+        <div class="row z-depth-1">
+          <form class="col s12 m6 l4 center flex disabled" style="display: flex; flex-direction: column; align-items: flex-start; padding: 2em; width: 100%;">
+            <div style="margin-bottom: 1em;">
+              <label for="skip_segments">
+                <input type="checkbox" id="skip_segments" name="skip_segments" />
+                <span>
+                  Skip (no-music) segments from <a href="https://sponsor.ajay.app/" rel="noopener noreferrer" target="_blank">Sponsorblock</a>
+                </span>
               </label>
-            </td>
-            <td>
-              <label>
-                <input type="radio" name="type" id="type_cmd">
-                cmd
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%; margin-bottom: 1em;">
+              <label for="quality" style="margin-right: 1em">
+                <span>Quality</span>
               </label>
-            </td>
-            <td>
-              <label>
-                <input type="radio" name="type" id="type_bg">
-                bg
-              </label>
-            </td>
-          </tr>
-        </table>
-      </fieldset>
-
-      <fieldset>
-        <legend>command</legend>
-        <table>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="command" id="cmd_echo">
-                echo
-              </label>
-            </td>
-            <td>
-              <input type="text"  name="" id="cmd_echo_text">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="command" id="cmd_random">
-                random
-              </label>
-            </td>
-            <td>
-              <label>
-                <input type="radio" name="echo" id="cmd_random_sync">
-                sync
-              </label>
-              <label>
-                <input type="radio" name="echo" id="cmd_random_async">
-                async
-              </label>
-            </td>
-          </tr>
-        </table>
-      </fieldset>
-
-      <fieldset id="ctx">
-        <legend>contexts</legend>
-        <table>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="contexts" id="ctx_all">
-                all
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="contexts" id="ctx_select">
-                select
-              </label>
-            </td>
-            <td>
-              <div>
-                <label><input type="checkbox" id="ctx_select_bg"> bg</label>
-                <label><input type="checkbox" id="ctx_select_ct"> ct</label>
-                <label><input type="checkbox" id="ctx_select_dt"> dt</label>
-                <label><input type="checkbox" id="ctx_select_popup"> popup</label>
-                <label><input type="checkbox" id="ctx_select_options"> options</label>
+              <div class="range-field" style="width: 100%">
+                <input type="range" id="quality" min="65" max="320" name="quality" />
               </div>
-            </td>
-          </tr>
-        </table>
-      </fieldset>
-
-      <fieldset id="tab">
-        <legend>tab id</legend>
-        <table>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="tabid" id="tab_all">
-                all
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="tabid" id="tab_same">
-                same (as me)
-              </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="radio" name="tabid" id="tab_provided">
-                provided
-              </label>
-            </td>
-            <td>
-              <input type="number" id="tab_provided_text">
-            </td>
-          </tr>
-        </table>
-      </fieldset>
-
-      <div>
-        <button id="submit">Go!</button>
-      </div>
-
-    </form>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">
+              Save
+              <i class="material-icons right">settings</i>
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
   </body>
+  <script src="../browser-polyfill.js" type="text/javascript"></script>
+  <script src="../js/options.js" type="text/javascript"></script>
 </html>

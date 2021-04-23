@@ -15,7 +15,7 @@ const fetchAudio = async (videoId: string, {
 
     const params = new URLSearchParams({
         quality: quality.toString(),
-        skipSegments: skipSegments.toString(),
+        skip_segments: skipSegments.toString(),
     });
     const url = `${baseURL}/${variant}/${videoId}?${params}`;
 

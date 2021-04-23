@@ -1,4 +1,4 @@
-import {Configuration} from "../../background/configuration";
+import {Configuration} from "./background/configuration";
 
 const retrieveConfiguration = async (): Promise<Configuration> => {
     const data = await browser.runtime.sendMessage({action: "get/configuration"});

@@ -31,6 +31,12 @@ module.exports = _.merge({}, config, {
                 from: "node_modules/webextension-polyfill/dist/browser-polyfill.js",
             }],
         }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: "node_modules/materialize-css/dist/css/materialize.min.css",
+                to: path.resolve(__dirname, "../build/dev/assets/css/materialize.min.css"),
+            }],
+        }),
         new VersionFilePlugin({
             packageFile: path.resolve(__dirname, "../package.json"),
             template: path.resolve(__dirname, "../src/manifest.json"),
