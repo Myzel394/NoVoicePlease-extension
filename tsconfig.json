@@ -7,6 +7,12 @@
         "allowJs": true,
         "moduleResolution": "node",
         "strict": true,
+        "lib": [
+            "DOM",
+            "ESNext",
+            "DOM.Iterable"
+        ],
+        "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "node_modules"

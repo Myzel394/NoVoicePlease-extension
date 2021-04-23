@@ -4,17 +4,30 @@
   "browser_action": {
     "default_icon": "assets/images/icon.png"
   },
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "js/background.js"
+    ]
+  },
   "content_scripts": [
     {
       "matches": [
         "*://*.youtube.com/*"
       ],
-      "js": ["js/content.js"],
+      "js": [
+        "browser-polyfill.js",
+        "js/content.js"
+      ],
       "run_at": "document_end"
     }
   ],
   "options_page": "html/options.html",
-  "permissions": [ "<all_urls>" ],
+  "permissions": [
+    "tabs",
+    "background",
+    "downloads"
+  ],
   "web_accessible_resources": [ "js/*", "html/*", "assets/*" ],
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "name": "<%= package.name %>",

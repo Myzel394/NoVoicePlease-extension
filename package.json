@@ -11,10 +11,14 @@
   },
   "dependencies": {
     "jquery": "3.1.1",
-    "lodash": "4.17.4"
+    "lodash": "4.17.4",
+    "sanitize-filename": "^1.6.3"
   },
   "devDependencies": {
     "@shopify/eslint-plugin": "^40.2.1",
+    "@types/firefox": "^0.0.30",
+    "@types/firefox-webext-browser": "^82.0.0",
+    "@types/sanitize-filename": "^1.6.3",
     "babel-core": "6.18.2",
     "babel-loader": "6.2.7",
     "babel-plugin-module-resolver": "2.3.0",
@@ -28,6 +32,7 @@
     "svg-inline-loader": "^0.8.2",
     "ts-loader": "8.x",
     "typescript": "^4.2.4",
+    "webextension-polyfill": "^0.8.0",
     "webpack": "4.x",
     "webpack-cli": "^4.6.0",
     "webpack-version-file-plugin": "^0.4.0"

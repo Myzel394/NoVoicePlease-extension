@@ -36,7 +36,7 @@ const addMenuButton = ({
     insertBefore: $insertBefore,
     icon: $icon,
 }: AddMenuButtonOptions): Promise<HTMLElement> => new Promise((resolve, reject) => {
-    if ($insertBefore.parentNode) {
+    if (!$insertBefore.parentNode) {
         reject(new Error("insertBefore has no parent"));
     }
 

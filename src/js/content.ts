@@ -1,1 +1,3 @@
-import "./modules/handleMenuConfiguration";
+import {configureMenu} from "./modules/content/youtube";
+
+configureMenu();

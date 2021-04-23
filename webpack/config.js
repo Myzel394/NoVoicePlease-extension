@@ -4,6 +4,7 @@ const path = require("path");
 // eslint-disable-next-line no-undef
 module.exports = {
     entry: {
+        background: "./src/js/background.ts",
         content: "./src/js/content.ts",
         options: "./src/js/options.ts",
     },
