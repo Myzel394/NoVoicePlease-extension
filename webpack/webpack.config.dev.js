@@ -11,13 +11,19 @@ module.exports = _.merge({}, config, {
     path: path.resolve(__dirname, '../build/dev'),
   },
 
+  mode: 'development',
   devtool: 'source-map',
   plugins: [
-    new CopyWebpackPlugin([
-      { from: './src' }
-    ], {
-      ignore: ['js/**/*', 'manifest.json'],
-      copyUnmodified: false
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.resolve(__dirname, '../src'),
+        globOptions: {
+          ignore: [
+            '**/*.ts',
+            '**/manifest.json',
+          ]
+        }
+      }]
     }),
     new VersionFilePlugin({
       packageFile: path.resolve(__dirname, '../package.json'),

@@ -56,6 +56,8 @@ const addMenuButton = ({
             </tp-yt-paper-tooltip>
         </a>
     `;
+
+
     // We need to wait until the elements are loaded
     const observer = new MutationObserver(() => {
         if ($button.querySelector("slot") === null) {
