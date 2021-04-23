@@ -1,21 +1,59 @@
 {
-  "env": {
-    "browser": true,
-    "mocha": true
-  },
-  "extends": "airbnb/base",
-  "parser": "babel-eslint",
+  "extends": [
+    "plugin:@shopify/esnext",
+    "plugin:@shopify/typescript",
+    "plugin:@shopify/typescript-type-checking"
+  ],
   "rules": {
-    "comma-dangle": 0,
-    "import/prefer-default-export": 0,
-
-    "no-underscore-dangle": 0,
-    "yoda": 0,
-    "prefer-rest-params": 0
+    "quotes": [
+      "error",
+      "double",
+      "avoid-escape"
+    ],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "indent-legacy": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "@typescript-eslint/quotes": [
+      "error",
+      "double"
+    ],
+    "no-trailing-spaces": "off",
+    "one-var": "off",
+    "arrow-parens": "off",
+    "no-return-assign": "off",
+    "eslint-comments/no-unlimited-disable": "off",
+    "no-warning-comments": "off",
+    "@shopify/binary-assignment-parens": "off",
+    "@typescript-eslint/no-extra-parens": "off",
+    "switch-colon-spacing": [
+      "error",
+      {
+        "after": true,
+        "before": false
+      }
+    ],
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "array"
+      }
+    ],
+    "promise/catch-or-return": "off",
+    "no-console": "warn",
+    "@typescript-eslint/no-unnecessary-condition": "off"
   },
-  "settings": {
-    "import/resolver": {
-      "babel-module": {}
-    }
+  "parserOptions": {
+    "project": "tsconfig.json"
   }
 }

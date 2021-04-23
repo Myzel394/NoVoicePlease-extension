@@ -1,5 +1,4 @@
-const waitUntilMenuAvailable = (callback: ($menu: HTMLElement) => any) => {
-    const body = document.querySelector("body");
+const waitUntilMenuAvailable = (callback: ($menu: HTMLElement) => any): void => {
     const observer = new MutationObserver((mutations) => {
         const isLoading = Boolean(document.getElementsByTagName("slot").length);
 
@@ -27,7 +26,7 @@ const waitUntilMenuAvailable = (callback: ($menu: HTMLElement) => any) => {
                 target.children.length === 2
             ) {
                 // Youtube tries to reorder the buttons here strangely, let's prevent that
-                $menu = mutation.target.parentElement.parentElement;
+                $menu = mutation.target.parentElement?.parentElement;
                 target.children[0].remove();
             }
         }
@@ -37,7 +36,7 @@ const waitUntilMenuAvailable = (callback: ($menu: HTMLElement) => any) => {
         }
     });
 
-    observer.observe(body, {
+    observer.observe(document.body, {
         subtree: true,
         childList: true,
         attributes: true,

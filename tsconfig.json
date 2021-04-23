@@ -3,9 +3,10 @@
         "outDir": "./dist/",
         "noImplicitAny": false,
         "module": "es6",
-        "target": "ESNext",
+        "target": "ES2017",
         "allowJs": true,
         "moduleResolution": "node",
+        "strict": true,
     },
     "exclude": [
         "node_modules"

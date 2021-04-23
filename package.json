@@ -14,8 +14,8 @@
     "lodash": "4.17.4"
   },
   "devDependencies": {
+    "@shopify/eslint-plugin": "^40.2.1",
     "babel-core": "6.18.2",
-    "babel-eslint": "7.1.0",
     "babel-loader": "6.2.7",
     "babel-plugin-module-resolver": "2.3.0",
     "babel-plugin-transform-runtime": "6.15.0",
@@ -24,12 +24,7 @@
     "copy-webpack-plugin": "6.2.x",
     "crx-webpack-plugin": "0.1.5",
     "css-loader": "0.26.0",
-    "eslint": "3.14.0",
-    "eslint-config-airbnb": "14.0.0",
-    "eslint-import-resolver-babel-module": "2.2.1",
-    "eslint-plugin-import": "2.2.0",
-    "eventemitter2": "0.4.14",
-    "sinon": "1.12.2",
+    "eslint": "^7.24.0",
     "svg-inline-loader": "^0.8.2",
     "ts-loader": "8.x",
     "typescript": "^4.2.4",

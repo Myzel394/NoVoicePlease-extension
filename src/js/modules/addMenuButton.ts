@@ -12,7 +12,7 @@ const prepareSVG = ($svg: SVGElement): void => {
     $svg.style.width = "100%";
     $svg.style.height = "100%";
 
-    $svg.querySelectorAll("*").forEach($element => {
+    $svg.querySelectorAll("*").forEach(($element) => {
         $element.classList.add(...SVG_CLASSES);
     });
     $svg.classList.add(...SVG_CLASSES);
@@ -35,7 +35,11 @@ const addMenuButton = ({
     onAction,
     insertBefore: $insertBefore,
     icon: $icon,
-}: AddMenuButtonOptions): Promise<HTMLElement> => new Promise(resolve => {
+}: AddMenuButtonOptions): Promise<HTMLElement> => new Promise((resolve, reject) => {
+    if ($insertBefore.parentNode) {
+        reject(new Error("insertBefore has no parent"));
+    }
+
     prepareSVG($icon);
 
     const $button = document.createElement("ytd-button-renderer");
@@ -45,7 +49,7 @@ const addMenuButton = ({
     $button.setAttribute("style-action-button", "");
     $button.setAttribute("is-icon-button", "");
 
-    $insertBefore.parentNode.insertBefore($button, $insertBefore);
+    $insertBefore.parentNode!.insertBefore($button, $insertBefore);
 
     $button.innerHTML = `
         <a class="yt-simple-endpoint style-scope ytd-button-renderer" tabindex="-1">
@@ -65,20 +69,29 @@ const addMenuButton = ({
             const $clickListener = $button.querySelector("a");
 
             // HTML needs to be set manually for them
-            const $buttonContainer: HTMLElement = $button.querySelector("yt-icon-button > button");
-            const $titleContainer: HTMLElement = $button.querySelector("yt-formatted-string");
-            const $tooltipContainer: HTMLElement = $button.querySelector(".tp-yt-paper-tooltip");
+            const $buttonContainer = $button.querySelector("yt-icon-button > button") as HTMLElement | null;
+            const $titleContainer = $button.querySelector("yt-formatted-string") as HTMLElement | null;
+            const $tooltipContainer = $button.querySelector(".tp-yt-paper-tooltip") as HTMLElement | null;
 
-            $buttonContainer.setAttribute("aria-label", ariaLabel || tooltip || title);
-            const $iconContainer = document.createElement("yt-icon");
-            $buttonContainer.appendChild($iconContainer);
-            $iconContainer.appendChild($icon);
+            if (
+                $clickListener &&
+                $buttonContainer &&
+                $titleContainer &&
+                $tooltipContainer
+            ) {
+                $buttonContainer.setAttribute("aria-label", ariaLabel || tooltip || title);
+                const $iconContainer = document.createElement("yt-icon");
+                $buttonContainer.appendChild($iconContainer);
+                $iconContainer.appendChild($icon);
 
-            $titleContainer.classList.remove("is-empty");
-            $titleContainer.innerText = title;
-            $tooltipContainer.innerText = tooltip || title;
+                $titleContainer.classList.remove("is-empty");
+                $titleContainer.innerText = title;
+                $tooltipContainer.innerText = tooltip || title;
 
-            $clickListener.onclick = onAction;
+                $clickListener.onclick = onAction;
+            } else {
+                reject(new Error("Elements missing"));
+            }
 
             // Clean up
             observer.disconnect();
