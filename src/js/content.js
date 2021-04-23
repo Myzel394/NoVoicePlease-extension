@@ -1,20 +1,67 @@
-import $ from 'jquery';
-import handlers from './modules/handlers';
-import msg from './modules/msg';
+import fileDownloadIcon from "../assets/svgs/file-download.svg";
+import musicNoteIcon from "../assets/svgs/music-note.svg";
+import waitUntilMenuAvailable from "./modules/waitUntilMenuAvailable";
+import addMenuButton from "./modules/addMenuButton";
+import {
+    addSpinner,
+    disableButton,
+    enableButton,
+    removeSpinner
+} from "./modules/button";
+import getVideoId from "./modules/getVideoId";
+import fetchAudio from "./modules/fetchAudio";
 
-// here we use SHARED message handlers, so all the contexts support the same
-// commands. but this is NOT typical messaging system usage, since you usually
-// want each context to handle different commands. for this you don't need
-// handlers factory as used below. simply create individual `handlers` object
-// for each context and pass it to msg.init() call. in case you don't need the
-// context to support any commands, but want the context to cooperate with the
-// rest of the extension via messaging system (you want to know when new
-// instance of given context is created / destroyed, or you want to be able to
-// issue command requests from this context), you may simply omit the
-// `handlers` parameter for good when invoking msg.init()
+const htmlToElement = (html) => {
+    const $element = document.createElement("div");
+    $element.innerHTML = html;
+    return $element.firstChild;
+}
 
-console.log('CONTENT SCRIPT WORKS!'); // eslint-disable-line no-console
+waitUntilMenuAvailable(async $menu => {
+    const $buttons = $menu.querySelector("#top-level-buttons");
+    const $shareButton = $buttons.children [2];
 
-msg.init('ct', handlers.create('ct'));
+    const videoId = getVideoId();
 
-console.log('jQuery version:', $().jquery); // eslint-disable-line no-console
+    const $audioButton = await addMenuButton({
+        title: "Audio",
+        icon: htmlToElement(fileDownloadIcon),
+        tooltip: "Download audio",
+        insertBefore: $shareButton,
+        onAction: async () => {
+            disableButton($audioButton);
+            addSpinner($audioButton);
+
+            try {
+                const url = await fetchAudio(videoId);
+
+                window.open(url, "_newtab");
+            } finally {
+                enableButton($audioButton);
+                removeSpinner($audioButton);
+            }
+        },
+    });
+    const $instrumentalButton = await addMenuButton({
+        title: "Instrumental",
+        icon: htmlToElement(musicNoteIcon),
+        tooltip: "Extract instrumental",
+        insertBefore: $shareButton,
+        onAction: async () => {
+            disableButton($instrumentalButton);
+            addSpinner($instrumentalButton);
+
+            try {
+                const url = await fetchAudio(videoId, {
+                    variant: "instrumental"
+                });
+
+                window.open(url, "_newtab");
+            } finally {
+                enableButton($instrumentalButton);
+                removeSpinner($instrumentalButton);
+            }
+        },
+    });
+})
+

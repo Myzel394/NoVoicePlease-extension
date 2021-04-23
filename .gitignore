@@ -8,5 +8,4 @@ build/prod
 build/updates.xml
 .tmp
 *.swp
-build
 .idea

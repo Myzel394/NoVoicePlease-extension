@@ -2,10 +2,6 @@
   "name": "extension-skeleton",
   "version": "0.3.0",
   "description": "Bare Google Chrome extension skeleton.",
-  "engines": {
-    "node": "7.0.0",
-    "npm": "3.10.8"
-  },
   "scripts": {
     "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
     "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
@@ -36,10 +32,11 @@
     "mocha": "1.20.0",
     "mocha-webpack": "0.7.0",
     "sinon": "1.12.2",
+    "svg-inline-loader": "^0.8.2",
     "webpack": "2.2.1",
     "webpack-dev-server": "1.16.2",
     "webpack-node-externals": "1.5.4",
-    "webpack-version-file-plugin": "0.2.2"
+    "webpack-version-file-plugin": "^0.4.0"
   },
   "export-symbol": "extensionSkeleton.exports"
 }
