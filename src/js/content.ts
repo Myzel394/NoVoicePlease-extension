@@ -1,31 +1,26 @@
-import fileDownloadIcon from "../assets/svgs/file-download.svg";
-import musicNoteIcon from "../assets/svgs/music-note.svg";
+import {MusicNote, FileDownload} from "../assets/svgs";
+
 import waitUntilMenuAvailable from "./modules/waitUntilMenuAvailable";
 import addMenuButton from "./modules/addMenuButton";
 import {
     addSpinner,
     disableButton,
     enableButton,
-    removeSpinner
+    removeSpinner,
 } from "./modules/button";
 import getVideoId from "./modules/getVideoId";
 import fetchAudio from "./modules/fetchAudio";
-
-const htmlToElement = (html) => {
-    const $element = document.createElement("div");
-    $element.innerHTML = html;
-    return $element.firstChild;
-}
+import htmlToElement from "./modules/htmlToElement";
 
 waitUntilMenuAvailable(async $menu => {
     const $buttons = $menu.querySelector("#top-level-buttons");
-    const $shareButton = $buttons.children [2];
+    const $shareButton = $buttons.children[2] as HTMLElement;
 
     const videoId = getVideoId();
 
     const $audioButton = await addMenuButton({
         title: "Audio",
-        icon: htmlToElement(fileDownloadIcon),
+        icon: htmlToElement(FileDownload),
         tooltip: "Download audio",
         insertBefore: $shareButton,
         onAction: async () => {
@@ -44,7 +39,7 @@ waitUntilMenuAvailable(async $menu => {
     });
     const $instrumentalButton = await addMenuButton({
         title: "Instrumental",
-        icon: htmlToElement(musicNoteIcon),
+        icon: htmlToElement(MusicNote),
         tooltip: "Extract instrumental",
         insertBefore: $shareButton,
         onAction: async () => {
@@ -53,7 +48,7 @@ waitUntilMenuAvailable(async $menu => {
 
             try {
                 const url = await fetchAudio(videoId, {
-                    variant: "instrumental"
+                    variant: "instrumental",
                 });
 
                 window.open(url, "_newtab");
@@ -63,5 +58,5 @@ waitUntilMenuAvailable(async $menu => {
             }
         },
     });
-})
+});
 

@@ -1,4 +1,4 @@
-const waitUntilMenuAvailable = (callback) => {
+const waitUntilMenuAvailable = (callback: ($menu: HTMLElement) => any) => {
     const body = document.querySelector("body");
     const observer = new MutationObserver((mutations) => {
         const isLoading = Boolean(document.getElementsByTagName("slot").length);
@@ -10,24 +10,25 @@ const waitUntilMenuAvailable = (callback) => {
         let $menu;
 
         for (const mutation of mutations) {
-            const target = mutation.target;
+            const target = mutation.target as HTMLElement;
 
             if (
                 mutation.type === "childList" &&
                 target.nodeName === "YTD-MENU-RENDERER" &&
                 target.classList.contains("ytd-video-primary-info-renderer")
             ) {
+                // Menu bar
                 $menu = target;
             } else if (
                 mutation.type === "attributes" &&
                 mutation.target.nodeName === "YTD-BUTTON-RENDERER" &&
-                mutation.target.classList.contains("ytd-menu-renderer") &&
                 mutation.attributeName === "is-icon-button" &&
-                mutation.target.children.length === 2
+                target.classList.contains("ytd-menu-renderer") &&
+                target.children.length === 2
             ) {
-                // Youtube reorders the button here strangely, let's just reset it.
+                // Youtube tries to reorder the buttons here strangely, let's prevent that
                 $menu = mutation.target.parentElement.parentElement;
-                mutation.target.children[0].remove();
+                target.children[0].remove();
             }
         }
 
