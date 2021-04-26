@@ -1,23 +1,26 @@
 {
-  "name": "extension-skeleton",
-  "version": "0.3.0",
-  "description": "Bare Google Chrome extension skeleton.",
+  "name": "novoiceplease-extension",
+  "version": "0.0.1",
+  "description": "Download audios from Youtube and remove the vocals from it!",
   "scripts": {
     "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
-    "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
-    "lint": "eslint src/js/",
-    "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
-    "test:ci": "mocha-webpack --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\""
+    "build:zip": "cd build/prod && zip -r -FS ./extension.zip ./ && mv extension.zip ../../NoVoicePlease.xpi",
+    "build:publish:firefox": "cd build/prod && web-ext-submit --api-key $FIREFOX_API_KEY --api-secret $FIREFOX_API_SECRET",
+    "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js"
   },
   "dependencies": {
+    "@webcomponents/webcomponentsjs": "^2.5.0",
     "materialize-css": "^1.0.0-rc.2",
+    "randomstring": "^1.1.5",
     "sanitize-filename": "^1.6.3"
   },
   "devDependencies": {
+    "web-ext-submit": "^6.1.0",
     "@shopify/eslint-plugin": "^40.2.1",
     "@types/firefox": "^0.0.30",
     "@types/firefox-webext-browser": "^82.0.0",
     "@types/materialize-css": "^1.0.9",
+    "@types/randomstring": "^1.1.6",
     "@types/sanitize-filename": "^1.6.3",
     "babel-core": "6.18.2",
     "babel-loader": "6.2.7",
@@ -29,9 +32,12 @@
     "crx-webpack-plugin": "0.1.5",
     "css-loader": "^5.2.4",
     "eslint": "^7.24.0",
+    "json-loader": "^0.5.7",
     "svg-inline-loader": "^0.8.2",
     "ts-loader": "8.x",
     "typescript": "^4.2.4",
+    "web-ext": "^6.1.0",
+    "web-ext-plugin": "^1.1.0",
     "webextension-polyfill": "^0.8.0",
     "webpack": "4.x",
     "webpack-cli": "^4.6.0",
