@@ -1,9 +1,11 @@
 import {MusicNote, FileDownload} from "../../../../assets/svgs";
 import {
+    addToast,
     getVideoId,
     htmlToElement,
 } from "../utils";
 import {downloadAudio} from "../backend-connection";
+import translate from "../../translate";
 
 import waitUntilMenuAvailable from "./waitUntilMenuAvailable";
 import addMenuButton from "./addMenuButton";
@@ -32,9 +34,9 @@ const configureMenu = () => {
         const $shareButton = $buttons.children[2] as HTMLElement;
 
         const $audioButton = await addMenuButton({
-            title: "Audio",
+            title: translate("inject_buttons_audio_title"),
             icon: htmlToElement(FileDownload),
-            tooltip: "Download audio",
+            tooltip: translate("inject_buttons_audio_description"),
             insertBefore: $shareButton,
             onAction: async () => {
                 disableButton($audioButton);
@@ -42,6 +44,8 @@ const configureMenu = () => {
 
                 try {
                     await downloadAudio("audio");
+                } catch (error) {
+                    addToast(translate("downloadError"));
                 } finally {
                     enableButton($audioButton);
                     removeSpinner($audioButton);
@@ -49,9 +53,9 @@ const configureMenu = () => {
             },
         });
         const $instrumentalButton = await addMenuButton({
-            title: "Instrumental",
+            title: translate("inject_buttons_instrumental_title"),
             icon: htmlToElement(MusicNote),
-            tooltip: "Extract instrumental",
+            tooltip: translate("inject_buttons_instrumental_description"),
             insertBefore: $shareButton,
             onAction: async () => {
                 disableButton($instrumentalButton);
@@ -59,6 +63,8 @@ const configureMenu = () => {
 
                 try {
                     await downloadAudio("instrumental");
+                } catch {
+                    addToast(translate("downloadError"));
                 } finally {
                     enableButton($instrumentalButton);
                     removeSpinner($instrumentalButton);

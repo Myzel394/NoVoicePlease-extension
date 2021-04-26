@@ -1,7 +1,7 @@
-// eslint-disable-next-line no-undef
 const path = require("path");
 
-// eslint-disable-next-line no-undef
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
 module.exports = {
     entry: {
         background: "./src/js/background.ts",
@@ -12,10 +12,44 @@ module.exports = {
         filename: "./js/[name].js",
     },
     resolve: {
-        // eslint-disable-next-line no-undef
         modules: [path.join(__dirname, "src"), "node_modules"],
         extensions: [".tsx", ".ts", ".js"],
     },
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, "../src"),
+                globOptions: {
+                    ignore: [
+                        "**/*.ts",
+                        "**/manifest.json",
+                        "**/icons",
+                    ],
+                },
+            }],
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: "node_modules/webextension-polyfill/dist/browser-polyfill.js",
+            }],
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, "../src/assets/icons"),
+            }],
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js",
+            }],
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: "node_modules/materialize-css/dist/css/materialize.min.css",
+                to: path.resolve(__dirname, "../build/prod/assets/css/materialize.min.css"),
+            }],
+        }),
+    ],
     module: {
         rules: [
             {
@@ -31,6 +65,7 @@ module.exports = {
             {
                 test: /\.svg$/,
                 use: "svg-inline-loader",
+                exclude: /node_modules/,
             },
         ],
     },

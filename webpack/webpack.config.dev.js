@@ -1,7 +1,7 @@
 const path = require("path");
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const _ = require("lodash");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 const VersionFilePlugin = require("webpack-version-file-plugin");
 
 const config = require("./config.js");
@@ -14,34 +14,14 @@ module.exports = _.merge({}, config, {
 
     mode: "development",
     devtool: "source-map",
+    watch: true,
+
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [{
-                from: path.resolve(__dirname, "../src"),
-                globOptions: {
-                    ignore: [
-                        "**/*.ts",
-                        "**/manifest.json",
-                    ],
-                },
-            }],
-        }),
-        new CopyWebpackPlugin({
-            patterns: [{
-                from: "node_modules/webextension-polyfill/dist/browser-polyfill.js",
-            }],
-        }),
-        new CopyWebpackPlugin({
-            patterns: [{
-                from: "node_modules/materialize-css/dist/css/materialize.min.css",
-                to: path.resolve(__dirname, "../build/dev/assets/css/materialize.min.css"),
-            }],
-        }),
         new VersionFilePlugin({
             packageFile: path.resolve(__dirname, "../package.json"),
             template: path.resolve(__dirname, "../src/manifest.json"),
             outputFile: path.resolve(__dirname, "../build/dev/manifest.json"),
         }),
+        ...config.plugins,
     ],
-    watch: true,
 });

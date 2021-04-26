@@ -9,3 +9,4 @@ build/updates.xml
 .tmp
 *.swp
 .idea
+.env

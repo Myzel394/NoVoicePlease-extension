@@ -1,14 +1,23 @@
 {
   "manifest_version": 2,
-  "icons": { "128": "assets/images/icon.png" },
+  "author": "Myzel394",
+  "incognito": "spanning",
+  "short_name": "NVP",
+  "name": "No Voice please",
+  "icons": {
+    "16": "./icon16x.png",
+    "48": "./icon48x.png",
+    "128": "./icon128x.png"
+  },
   "browser_action": {
-    "default_icon": "assets/images/icon.png"
+    "default_icon": "icon128x.png"
   },
   "background": {
     "scripts": [
       "browser-polyfill.js",
       "js/background.js"
-    ]
+    ],
+    "persistent": true
   },
   "content_scripts": [
     {
@@ -17,20 +26,25 @@
       ],
       "js": [
         "browser-polyfill.js",
+        "webcomponents-bundle.js",
         "js/content.js"
       ],
       "run_at": "document_end"
     }
   ],
-  "options_page": "html/options.html",
+  "default_locale": "en",
+  "options_ui": {
+    "chrome_style": true,
+    "browser_style": true,
+    "page": "html/options.html"
+  },
   "permissions": [
-    "tabs",
-    "background",
-    "downloads"
+    "downloads",
+    "storage",
+    "*://*.youtube.com/*"
   ],
   "web_accessible_resources": [ "js/*", "html/*", "assets/*" ],
   "content_security_policy": "script-src 'self'; object-src 'self'",
-  "name": "<%= package.name %>",
   "version": "<%= package.version %>",
   "description": "<%= package.description %>"
 }

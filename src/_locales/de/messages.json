@@ -1,0 +1,58 @@
+{
+    "downloadError": {
+        "message": "Es gab einen Fehler. Sorry",
+        "description": ""
+    },
+    "inject_buttons_audio_title": {
+        "message": "Audio",
+        "description": ""
+    },
+    "inject_buttons_audio_description": {
+        "message": "Audio runterladen",
+        "description": ""
+    },
+    "inject_buttons_instrumental_title": {
+        "message": "Instrumental",
+        "description": ""
+    },
+    "inject_buttons_instrumental_description": {
+        "message": "Instrumental extrahieren",
+        "description": ""
+    },
+    "optionsPage_header_title": {
+        "message": "Einstellungen",
+        "description": ""
+    },
+    "optionsPage_form_skipSegments_title": {
+        "message": "Stellen ohne Musik entfernen",
+        "description": ""
+    },
+    "optionsPage_form_skipSegments_description": {
+        "message": "Stellen werden von Sponsorblock downgeloadet",
+        "description": ""
+    },
+    "optionsPage_form_quality_title": {
+        "message": "Qualität",
+        "description": ""
+    },
+    "optionsPage_form_api_title": {
+        "message": "API",
+        "description": ""
+    },
+    "optionsPage_form_quality_viewDocsDescription": {
+        "message": "API-Dokumentation anzeigen",
+        "description": ""
+    },
+    "optionsPage_form_saveButton": {
+        "message": "Speichern",
+        "description": ""
+    },
+    "optionsPage_form_save_toast": {
+        "message": "Einstellungen übernommen",
+        "description": ""
+    },
+    "optionsPage_form_save_error": {
+        "message": "Es gab einen Fehler",
+        "description": ""
+    }
+}

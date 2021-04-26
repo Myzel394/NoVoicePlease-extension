@@ -2,41 +2,62 @@
 <html>
   <head>
     <title>Options</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../assets/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/options.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-    <div class="container">
-      <section class="section" style="max-width: 50em">
-        <h5>
-          Settings
-        </h5>
-        <div class="row z-depth-1">
-          <form class="col s12 m6 l4 center flex disabled" style="display: flex; flex-direction: column; align-items: flex-start; padding: 2em; width: 100%;">
-            <div style="margin-bottom: 1em;">
-              <label for="skip_segments">
-                <input type="checkbox" id="skip_segments" name="skip_segments" />
-                <span>
-                  Skip (no-music) segments from <a href="https://sponsor.ajay.app/" rel="noopener noreferrer" target="_blank">Sponsorblock</a>
-                </span>
-              </label>
-            </div>
-            <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%; margin-bottom: 1em;">
-              <label for="quality" style="margin-right: 1em">
-                <span>Quality</span>
-              </label>
-              <div class="range-field" style="width: 100%">
-                <input type="range" id="quality" min="65" max="320" name="quality" />
+    <div style="padding: 2em">
+      <div class="panel-section panel-section-formElements">
+        <section class="section" style="max-width: 50em">
+          <header class="panel-section panel-section-header">
+            <h5 class="text-section-header">
+              __MSG_optionsPage_header_title__
+            </h5>
+          </header>
+          <div class="row z-depth-1">
+            <form class="col s12 m6 l4 center flex disabled" style="display: flex; flex-direction: column; align-items: flex-start; padding: 2em; width: 100%;">
+              <div class="panel-formElements-item" style="margin-bottom: 1em;">
+                <label for="skip_segments">
+                  <input type="checkbox" id="skip_segments" name="skip_segments" />
+                  <span>
+                    __MSG_optionsPage_form_skipSegments_title__
+                  </span>
+                  <a style="display: block" href="https://sponsor.ajay.app/" rel="noopener noreferrer" target="_blank">
+                    __MSG_optionsPage_form_skipSegments_description__
+                  </a>
+                </label>
               </div>
-            </div>
-            <button class="btn waves-effect waves-light" type="submit">
-              Save
-              <i class="material-icons right">settings</i>
-            </button>
-          </form>
-        </div>
-      </section>
+              <div class="panel-formElements-item" style="display: flex; flex-direction: column; align-items: flex-start; width: 100%; margin-bottom: 1em;">
+                <label for="quality" style="margin-right: 1em">
+                  <span>
+                    __MSG_optionsPage_form_quality_title__
+                  </span>
+                </label>
+                <div class="range-field" style="width: 100%">
+                  <input type="range" id="quality" min="65" max="320" name="quality" />
+                </div>
+              </div>
+              <div class="panel-formElements-item" style="display: flex; flex-direction: column; align-items: flex-start; width: 100%; margin-bottom: 1em;">
+                <label for="api" style="margin-right: 1em">
+                  <span>
+                    __MSG_optionsPage_form_api_title__
+                  </span>
+                </label>
+                <select id="api"></select>
+                <a href="#" id="view_docs" target="_blank">
+                  __MSG_optionsPage_form_quality_viewDocsDescription__
+                </a>
+              </div>
+              <button style="background: #26a69a; color: #fff" class="btn waves-effect waves-light" type="submit">
+                __MSG_optionsPage_form_saveButton__
+                <i class="material-icons right">settings</i>
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
     </div>
   </body>
   <script src="../browser-polyfill.js" type="text/javascript"></script>

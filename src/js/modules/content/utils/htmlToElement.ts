@@ -1,7 +1,8 @@
 const htmlToElement = <T extends Element = HTMLElement>(html: string): T => {
-    const $element = document.createElement("div");
-    $element.innerHTML = html;
-    return $element.firstChild as T;
+    const parser = new DOMParser();
+    const parsed = parser.parseFromString(html, "text/html");
+
+    return parsed.body.firstChild as T;
 };
 
 export default htmlToElement;
