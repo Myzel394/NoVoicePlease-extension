@@ -4,8 +4,9 @@
   "description": "Download audios from Youtube and remove the vocals from it!",
   "scripts": {
     "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
-    "build:zip": "cd build/prod && zip -r -FS ./extension.zip ./ && mv extension.zip ../../NoVoicePlease.xpi",
+    "build:zip": "cd build/prod && zip -r -FS ./extension.zip ./ && mv extension.zip ../../NoVoicePlease.zip",
     "build:publish:firefox": "cd build/prod && web-ext-submit --api-key $FIREFOX_API_KEY --api-secret $FIREFOX_API_SECRET",
+    "build:publish:opera": "shipit opera build/prod",
     "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js"
   },
   "dependencies": {
@@ -15,13 +16,13 @@
     "sanitize-filename": "^1.6.3"
   },
   "devDependencies": {
-    "web-ext-submit": "^6.1.0",
     "@shopify/eslint-plugin": "^40.2.1",
     "@types/firefox": "^0.0.30",
     "@types/firefox-webext-browser": "^82.0.0",
     "@types/materialize-css": "^1.0.9",
     "@types/randomstring": "^1.1.6",
     "@types/sanitize-filename": "^1.6.3",
+    "@wext/shipit": "^0.2.1",
     "babel-core": "6.18.2",
     "babel-loader": "6.2.7",
     "babel-plugin-module-resolver": "2.3.0",
@@ -38,6 +39,7 @@
     "typescript": "^4.2.4",
     "web-ext": "^6.1.0",
     "web-ext-plugin": "^1.1.0",
+    "web-ext-submit": "^6.1.0",
     "webextension-polyfill": "^0.8.0",
     "webpack": "4.x",
     "webpack-cli": "^4.6.0",

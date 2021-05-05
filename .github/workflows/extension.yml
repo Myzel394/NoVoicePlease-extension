@@ -1,0 +1,75 @@
+name: NoVoicePlease-Extension CI:CD Build extension
+
+on:
+  release:
+    branches: [ master ]
+
+jobs:
+  create-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Yarn
+        run: npm install -g yarn
+      - name: Install packages
+        run: yarn install
+      - name: Build extension
+        run: yarn build
+      - name: Zip extension
+        run: yarn build:zip
+      - name: Upload zip file
+        uses: softprops/action-gh-release@v1
+        with:
+          files: NoVoicePlease.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  Firefox:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Yarn
+        run: npm install -g yarn
+      - name: Install packages
+        run: yarn install
+      - name: Build extension
+        run: yarn build
+      - name: Publish extension
+        run: yarn build:publish:firefox
+        env:
+          FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+  Opera:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Yarn
+        run: npm install -g yarn
+      - name: Install packages
+        run: yarn install
+      - name: Build extension
+        run: yarn build
+      - name: Publish extension
+        run: yarn build:publish:opera
+        env:
+          WEXT_SHIPIT_OPERA_EMAIL: ${{ secrets.OPERA_EMAIL }}
+          WEXT_SHIPIT_OPERA_EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+          WEXT_SHIPIT_OPERA_PASSWORD: ${{ secrets.OPERA_PASSWORD }}
